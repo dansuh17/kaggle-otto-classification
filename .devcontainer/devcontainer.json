@@ -1,0 +1,15 @@
+{
+    "name": "python3",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "settings": {
+            "terminal.integrated.shell.linux": "/bin/bash",
+            "python.linting.enabled": true,
+            "python.linting.pylintEnabled": true
+        },
+        "extensions": [
+            "ms-python.python"
+        ],
+        "remoteUser": "vscode"
+    }
+}
