@@ -221,37 +221,6 @@ steps = [
 ]
 
 
-def train_xgboost(train_data, train_targets, val_data, val_targets):
-    model = XGBClassifier(n_estimators=500, learning_rate=0.05, n_jobs=4)
-    model.fit(train_data, train_targets, early_stopping_rounds=10, eval_set=[(val_data, val_targets)])
-    return model
-
-
-def train_gridsearch(train_data, targets):
-    # experiment k-fold
-    xgb_model = XGBClassifier(
-            learning_rate=0.05,
-            objective='multi:softprob')
-
-    test_params = {
-        'n_estimators': [100, 500, 900],
-        'max_depth': [5, 7],
-    }
-
-    # define k-fold validation set
-    kfold = KFold(n_splits=5, shuffle=True)
-
-    cv_model = GridSearchCV(
-        estimator=xgb_model, 
-        param_grid=test_params, 
-        cv=kfold, 
-        n_jobs=8,
-        verbose=2, 
-        refit=True)
-
-    cv_model.fit(train_data, targets)
-    return cv_model
-
 def train_calib(train_data, targets):
     model = XGBClassifier(
         learning_rate=0.05, 
